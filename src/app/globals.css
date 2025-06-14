@@ -1,0 +1,232 @@
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #c8a365;
+  --secondary-color: #8b5e34;
+  --dark-bg: rgba(10, 5, 0, 0.7);
+  --text-glow: 0 0 8px var(--primary-color), 0 0 15px var(--primary-color);
+  --arena-color: #e74c3c;
+  --info-color: #3498db;
+  --info-color-light: #5dade2;
+  --clan-color: #2ecc71;
+  --shop-color: #9b59b6;
+}
+
+@layer base {
+  body {
+    @apply m-0 p-0 w-full h-full overflow-hidden bg-black text-gray-200;
+  }
+}
+
+/* THÊM CÁC STYLES CHO MODAL TẠI ĐÂY */
+.modal {
+  position: fixed;
+  z-index: 1000; /* Tăng z-index để đảm bảo nó ở trên cùng */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.85); /* Nền tối nhẹ */
+  display: none; /* Mặc định ẩn */
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px); /* Hiệu ứng blur */
+  transition: opacity 0.3s ease-in-out; /* Thêm transition cho hiệu ứng mượt mà */
+  opacity: 0; /* Mặc định ẩn */
+  pointer-events: none; /* Vô hiệu hóa tương tác khi ẩn */
+}
+
+.modal.active {
+  display: flex !important; /* QUAN TRỌNG: Thêm !important để ghi đè */
+  opacity: 1; /* Hiện modal */
+  pointer-events: auto; /* Kích hoạt tương tác */
+}
+
+.modal-content {
+  background: var(--dark-bg);
+  margin: auto;
+  padding: 30px;
+  border: 2px solid var(--primary-color);
+  border-radius: 15px;
+  width: 90%;
+  max-width: 700px;
+  position: relative;
+  box-shadow: 0 0 30px var(--primary-color);
+  animation: modalSlideIn 0.3s forwards; /* Thêm hiệu ứng slide */
+  transform: translateY(-20px); /* Bắt đầu hơi dịch lên */
+  opacity: 0; /* Bắt đầu ẩn */
+}
+
+.modal.active .modal-content {
+  animation: modalSlideIn 0.3s forwards; /* Chạy animation khi active */
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+.close-btn {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+/* THÊM CÁC STYLES CHO CÁC MODAL CỤ THỂ HOẶC CÁC THÀNH PHẦN KHÁC NẾU CẦN */
+.player-stats {
+  /* Bạn có thể thêm các style riêng cho modal này ở đây */
+}
+/* ... các class modal khác như .leaderboard, .arena, v.v. */
+
+
+@layer components {
+  .text-shadow-glow {
+    text-shadow: var(--text-glow);
+  }
+
+  .bg-dark-bg {
+    background-color: var(--dark-bg);
+  }
+
+  .bg-primary {
+    background-color: var(--primary-color);
+  }
+
+  .bg-secondary {
+    background-color: var(--secondary-color);
+  }
+
+  .bg-arena-color {
+    background-color: var(--arena-color);
+  }
+
+  .bg-info-color {
+    background-color: var(--info-color);
+  }
+
+  .bg-clan-color {
+    background-color: var(--clan-color);
+  }
+
+  .bg-shop-color {
+    background-color: var(--shop-color);
+  }
+
+  .text-primary {
+    color: var(--primary-color);
+  }
+
+  .text-secondary {
+    color: var(--secondary-color);
+  }
+
+  .border-primary {
+    border-color: var(--primary-color);
+  }
+
+  .border-secondary {
+    border-color: var(--secondary-color);
+  }
+
+  .border-info-color-light {
+    border-color: var(--info-color-light);
+  }
+}
+
+@layer utilities {
+  .bg-radial-gradient {
+    background: radial-gradient(circle, rgba(200, 163, 101, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
+  }
+}
+
+/* Đã có các @keyframes và animate classes ở dưới, giữ nguyên */
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-60px);
+    opacity: 0;
+  }
+}
+
+@keyframes levelUpPulse {
+  0% {
+    transform: scale(1) translateX(-50%);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) translateX(-50%);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5) translateX(-50%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideInAndOut {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  85% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+.animate-float-up {
+  animation: floatUp 2s ease-out forwards;
+}
+
+.animate-level-up-pulse {
+  animation: levelUpPulse 2s ease-out forwards;
+}
+
+.animate-slide-in-out {
+  animation: slideInAndOut 5s forwards;
+}
